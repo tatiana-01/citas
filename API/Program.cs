@@ -1,8 +1,9 @@
+using API.Extensions;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.ConfigureCors();
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -41,6 +42,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
+app.UseCors("CorsPolicy");
 
 app.UseHttpsRedirection();
 

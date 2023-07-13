@@ -7,7 +7,7 @@ namespace Core.Entities;
 
     public class Usuario
     {
-        public int id { get; set; }
+        public string id { get; set; }
         public string ? nombre { get; set; }
         public string ? segdo_nombre { get; set; }
         public string ? primer_apellido { get; set; }

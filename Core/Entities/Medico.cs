@@ -9,7 +9,7 @@ namespace Core.Entities;
     public class Medico
     {
         [Key]
-        public int nroMatriculaProfesional { get; set; }
+        public string nroMatriculaProfesional { get; set; }
         public string ? nombreCompleto { get; set; }
         public int consultorio { get; set; }
         public Consultorio consultorioMedico { get; set; }

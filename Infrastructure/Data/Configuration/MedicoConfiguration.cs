@@ -11,6 +11,7 @@ public class MedicoConfiguration : IEntityTypeConfiguration<Medico>
         builder.ToTable("medico");
 
         builder.Property(p=>p.nroMatriculaProfesional)
+        .HasMaxLength(50)
         .IsRequired();
 
         builder.Property(p=>p.nombreCompleto)

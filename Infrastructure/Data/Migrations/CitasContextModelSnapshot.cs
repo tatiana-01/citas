@@ -51,8 +51,9 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("datosUsuario")
-                        .HasColumnType("int");
+                    b.Property<string>("datosUsuario")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("estadoCita")
                         .HasColumnType("int");
@@ -60,8 +61,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("fecha")
                         .HasColumnType("date");
 
-                    b.Property<int>("medico")
-                        .HasColumnType("int");
+                    b.Property<string>("medico")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("id");
 
@@ -145,9 +147,9 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Medico", b =>
                 {
-                    b.Property<int>("nroMatriculaProfesional")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("nroMatriculaProfesional")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("consultorio")
                         .HasColumnType("int");
@@ -192,9 +194,9 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Usuario", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int?>("acudiente")
                         .IsRequired()

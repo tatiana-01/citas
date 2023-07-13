@@ -15,6 +15,7 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
         builder.ToTable("usuario");
 
         builder.Property(p=>p.id)
+        .HasMaxLength(50)
         .IsRequired();
 
         builder.Property(p=>p.nombre)

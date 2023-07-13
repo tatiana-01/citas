@@ -12,7 +12,7 @@ namespace Core.Entities;
         public EstadoCita EstadoCita { get; set; }
         public int estadoCita { get; set; }
         public Medico medicoCita { get; set; }
-        public int medico { get; set; }
+        public string medico { get; set; }
         public Usuario usuarioCita { get; set; }
-        public int datosUsuario { get; set; }
+        public string datosUsuario { get; set; }
     }

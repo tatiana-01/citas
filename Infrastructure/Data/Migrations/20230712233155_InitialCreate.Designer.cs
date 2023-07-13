@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CitasContext))]
-    [Migration("20230712130442_RelacionesCitas")]
-    partial class RelacionesCitas
+    [Migration("20230712233155_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,8 +54,9 @@ namespace Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("datosUsuario")
-                        .HasColumnType("int");
+                    b.Property<string>("datosUsuario")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("estadoCita")
                         .HasColumnType("int");
@@ -63,8 +64,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("fecha")
                         .HasColumnType("date");
 
-                    b.Property<int>("medico")
-                        .HasColumnType("int");
+                    b.Property<string>("medico")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("id");
 
@@ -148,9 +150,9 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Medico", b =>
                 {
-                    b.Property<int>("nroMatriculaProfesional")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("nroMatriculaProfesional")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int>("consultorio")
                         .HasColumnType("int");
@@ -164,6 +166,10 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("varchar(120)");
 
                     b.HasKey("nroMatriculaProfesional");
+
+                    b.HasIndex("consultorio");
+
+                    b.HasIndex("especialidad");
 
                     b.ToTable("medico", (string)null);
                 });
@@ -191,11 +197,12 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Usuario", b =>
                 {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("id")
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
 
                     b.Property<int?>("acudiente")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("direccion")
@@ -209,6 +216,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<int?>("genero")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("nombre")
@@ -237,6 +245,7 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<int?>("tipodoc")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("id");
@@ -277,19 +286,44 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("usuarioCita");
                 });
 
+            modelBuilder.Entity("Core.Entities.Medico", b =>
+                {
+                    b.HasOne("Core.Entities.Consultorio", "consultorioMedico")
+                        .WithMany("Medicos")
+                        .HasForeignKey("consultorio")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Especialidad", "especialidadMedico")
+                        .WithMany("Medicos")
+                        .HasForeignKey("especialidad")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("consultorioMedico");
+
+                    b.Navigation("especialidadMedico");
+                });
+
             modelBuilder.Entity("Core.Entities.Usuario", b =>
                 {
                     b.HasOne("Core.Entities.Acudiente", "Acudiente")
                         .WithMany("Usuarios")
-                        .HasForeignKey("acudiente");
+                        .HasForeignKey("acudiente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.Genero", "Genero")
                         .WithMany("Usuarios")
-                        .HasForeignKey("genero");
+                        .HasForeignKey("genero")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Core.Entities.TipoDoc", "TipoDoc")
                         .WithMany("Usuarios")
-                        .HasForeignKey("tipodoc");
+                        .HasForeignKey("tipodoc")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Acudiente");
 
@@ -301,6 +335,16 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Acudiente", b =>
                 {
                     b.Navigation("Usuarios");
+                });
+
+            modelBuilder.Entity("Core.Entities.Consultorio", b =>
+                {
+                    b.Navigation("Medicos");
+                });
+
+            modelBuilder.Entity("Core.Entities.Especialidad", b =>
+                {
+                    b.Navigation("Medicos");
                 });
 
             modelBuilder.Entity("Core.Entities.EstadoCita", b =>
