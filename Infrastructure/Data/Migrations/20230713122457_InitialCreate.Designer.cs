@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(CitasContext))]
-    [Migration("20230712233155_InitialCreate")]
+    [Migration("20230713122457_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -82,7 +82,6 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Consultorio", b =>
                 {
                     b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("nombre")

@@ -7,6 +7,7 @@ builder.Services.ConfigureCors();
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAplicationServices();
 builder.Services.AddDbContext<CitasContext>(optionsBuilder =>
 {
     string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

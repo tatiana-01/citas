@@ -11,7 +11,8 @@ public class ConsultorioConfiguration : IEntityTypeConfiguration<Consultorio>
         builder.ToTable("consultorio");
 
         builder.Property(p=>p.id)
-        .IsRequired();
+        .IsRequired()
+        .ValueGeneratedNever();
 
         builder.Property(p=>p.nombre)
         .HasMaxLength(50)

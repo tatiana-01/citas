@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6VlLfWxvoSbsvG4LluIwZKp/GukT213Z+pIH+wa8PRYUaGRmmF9mPYzgE40L31uUl7sAAHFaTNW5QtlcFHNjRQ==",
+  "dgSpecHash": "WUiaa/alZKDd7fzN7cxb1K12XX3EMDS4cqhV4Tc0D4MKsmaGfrjEoTfUW3UrawpIGQ+cG8G4ZfMLK5my8CEI9A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tatiana Paredes C\\Desktop\\citas\\Core\\Core.csproj",
+  "projectFilePath": "/home/apolm01-033/Desktop/citas/Core/Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

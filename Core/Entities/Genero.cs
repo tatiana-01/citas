@@ -10,5 +10,5 @@ namespace Core.Entities;
         public int id { get; set; }
         public string ? nombre { get; set; }
         public string ? abreviatura { get; set; }
-        public ICollection<Usuario> Usuarios { get; set; }
+        public ICollection<Usuario> ? Usuarios { get; set; }
     }
