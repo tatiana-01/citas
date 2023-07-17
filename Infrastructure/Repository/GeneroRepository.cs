@@ -45,7 +45,7 @@ public class GeneroRepository : IGeneroInterface
         _context.Set<Genero>().RemoveRange(entities);
     }
 
-    public void update(Genero entity)
+    public void Update(Genero entity)
     {
         _context.Set<Genero>().Update(entity);
     }

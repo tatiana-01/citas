@@ -12,5 +12,5 @@ namespace Core.Interfaces;
         void AddRange(IEnumerable<Genero> entities);
         void Remove(Genero entity);
         void RemoveRange(IEnumerable<Genero> entities);
-        void update(Genero entity);
+        void Update(Genero entity);
     }
