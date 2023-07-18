@@ -139,3 +139,5 @@ C:/Users/Tatiana Paredes C/Desktop/citas/API/obj/Debug/net7.0/ref/API.dll
 /home/skylab-132/Desktop/citas/API/obj/Debug/net7.0/API.csproj.CopyComplete
 /home/skylab-132/Desktop/citas/API/obj/Debug/net7.0/API.genruntimeconfig.cache
 /home/skylab-132/Desktop/citas/API/obj/Debug/net7.0/ref/API.dll
+/home/apolm01-033/Desktop/citas/API/bin/Debug/net7.0/AutoMapper.dll
+/home/apolm01-033/Desktop/citas/API/bin/Debug/net7.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll

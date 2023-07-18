@@ -33,7 +33,9 @@ public class GeneroRepository : IGeneroInterface
     }
     public async Task<Genero> GetByIdAsync(int id)
     {
-        return await _context.Set<Genero>().FindAsync(id);
+        return await _context.Generos
+        .Include(p=>p.Usuarios)
+        .FirstOrDefaultAsync(p=>p.id == id);
     }
     public void Remove(Genero entity)
     {

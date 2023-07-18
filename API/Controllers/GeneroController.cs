@@ -1,3 +1,5 @@
+using API.Dtos;
+using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -9,35 +11,38 @@ namespace API.Controllers;
 public class GeneroController : BaseApiController
 {
     private readonly IUnitOfWork unitOfWork;
+    private readonly IMapper mapper;
 
-    public GeneroController(IUnitOfWork _unitOfWork)
+    public GeneroController(IUnitOfWork _unitOfWork,IMapper mapper)
     {
         unitOfWork = _unitOfWork;
+        this.mapper = mapper;
     }
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<IEnumerable<Genero>>> Get()
+    public async Task<List<GeneroDTO>> Get()
     {
         var generos = await unitOfWork.Generos.GetAllAsync();
-        return Ok(generos);
+        return this.mapper.Map<List<GeneroDTO>>(generos);
     }
 
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Get(int id)
+    public async Task<ActionResult<GeneroDTO>> Get(int id)
     {
         var genero = await unitOfWork.Generos.GetByIdAsync(id);
-        return Ok(genero);
+        return this.mapper.Map<GeneroDTO>(genero);
     }
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Genero>> Post(Genero genero)
+    public async Task<ActionResult> Post(GeneroDTO generoCreacion)
     {
+        var genero=mapper.Map<Genero>(generoCreacion);
         this.unitOfWork.Generos.Add(genero);
         await unitOfWork.SaveAsync();
         if(genero == null){
@@ -50,9 +55,9 @@ public class GeneroController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<Genero>> Put(int id, [FromBody]Genero genero)
+    public async Task<ActionResult<Genero>> Put(int id, [FromBody]GeneroDTO generoEdicion)
     {
-
+        var genero=mapper.Map<Genero>(generoEdicion);
         if(genero == null){
             return NotFound();
         }
